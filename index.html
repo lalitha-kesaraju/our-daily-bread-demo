@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Daily Bread Co — San Diego · Catalogue, Cart &amp; Checkout</title>
+<style>
+  :root{--ink:#33251a;--wheat:#a86e1c;--wheat2:#d9a441;--cream:#fbf4e6;--paper:#fffdf8;--rust:#8a4b2a;--green:#1d7a3a;--wa:#075e54}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:linear-gradient(165deg,#1f1508,#40301b 55%,#291c0d);color:var(--ink);min-height:100vh;padding:18px 14px 40px}
+  .wrap{max-width:540px;margin:0 auto}
+  .demo-banner{background:#00000055;color:#f3ddae;border:1px dashed var(--wheat2);border-radius:10px;padding:8px 12px;font-size:13px;text-align:center;margin-bottom:14px;font-family:Arial,sans-serif}
+  .card{background:var(--cream);border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+  .hero{padding:30px 22px 10px;text-align:center;background:radial-gradient(ellipse at top,#fffaf0,var(--cream))}
+  .hero .kicker{letter-spacing:3px;font-size:11px;color:var(--wheat);font-family:Arial,sans-serif;font-weight:bold}
+  .hero h1{font-size:42px;line-height:1.05;margin-top:6px;color:var(--ink)}
+  .hero h1 span{font-style:italic;font-weight:normal;color:var(--wheat);font-size:26px;display:block}
+  .hero p.tag{margin-top:10px;font-style:italic;color:#6b4e2e;font-size:16.5px}
+  .stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:16px 14px 4px;font-family:Arial,sans-serif}
+  .stat{background:#fffaf0;border:1px solid #ecd3ac;border-radius:12px;padding:9px 13px;text-align:center;min-width:96px}
+  .stat b{display:block;font-size:16px;color:var(--rust)}
+  .stat span{font-size:11.5px;color:#8a6a35}
+  .services{padding:16px 22px 2px;display:flex;flex-direction:column;gap:10px}
+  .svc{background:var(--paper);border:1px solid #ecd3ac;border-radius:12px;padding:13px 15px;font-family:Arial,sans-serif}
+  .svc b{color:var(--rust);font-size:15.5px}
+  .svc p{font-size:13.5px;color:#6b4e2e;margin-top:3px;line-height:1.5}
+  h2.sec{font-size:21px;color:var(--rust);padding:20px 22px 2px}
+  p.secsub{font-family:Arial,sans-serif;font-size:12.5px;color:#9a7434;padding:0 22px}
+  .catalog{margin:12px 22px 0;display:flex;flex-direction:column;gap:9px;font-family:Arial,sans-serif}
+  .item{background:#fffaf0;border:1px solid #ecd3ac;border-radius:12px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .item b{font-size:14.5px;color:var(--rust)}
+  .item p{font-size:12.5px;color:#6b4e2e;margin-top:2px}
+  .item .pr{font-weight:bold;color:var(--rust);white-space:nowrap}
+  .item button{background:var(--wheat);color:#fff;border:none;border-radius:99px;padding:8px 14px;font-size:13px;font-weight:bold;cursor:pointer;white-space:nowrap}
+  .cartbox{margin:14px 22px 0;background:#fff;border:1.5px solid var(--wheat2);border-radius:12px;padding:14px 16px;font-family:Arial,sans-serif}
+  .cartbox h3{color:var(--rust);font-size:16px;margin-bottom:8px}
+  .cline{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:6px 0;border-bottom:1px dotted #dec493}
+  .cline:last-of-type{border-bottom:none}
+  .qbtn{background:#f3e3bd;border:1px solid #dec493;border-radius:8px;width:26px;height:26px;font-size:15px;cursor:pointer;line-height:1}
+  .ctotal{display:flex;justify-content:space-between;font-weight:bold;font-size:16px;margin-top:10px;color:var(--rust)}
+  .cempty{font-size:13.5px;color:#9a7434}
+  form{padding:14px 22px 6px;font-family:Arial,sans-serif}
+  label{display:block;font-size:13px;font-weight:bold;margin:12px 0 5px;color:#6b3d16}
+  input,select{width:100%;padding:12px;border:1.5px solid #dec493;border-radius:10px;font-size:16px;background:#fff;font-family:Arial,sans-serif}
+  .grid2{display:flex;gap:10px}.grid2>div{flex:1}
+  button.cta{width:100%;margin:16px 0 8px;background:linear-gradient(90deg,var(--rust),#b5703c);color:#ffedc9;border:none;padding:15px;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer;letter-spacing:.5px}
+  .tiny{font-size:12px;color:#9a7434;text-align:center;padding:0 22px 18px;font-family:Arial,sans-serif}
+  .confirm{display:none;margin:0 22px 20px;background:#eaf7ee;border:1.5px solid var(--green);border-radius:12px;padding:16px;font-family:Arial,sans-serif}
+  .confirm h3{color:var(--green);margin-bottom:6px}
+  .confirm .id{font-size:20px;font-weight:bold;letter-spacing:1px}
+  .err{color:#b3261e;font-size:13px;margin-top:8px;display:none}
+  .panel{margin-top:16px;background:#fffdf6;border-radius:18px;padding:18px 20px;box-shadow:0 10px 30px rgba(0,0,0,.3);font-family:Arial,sans-serif}
+  .panel h2{font-family:Georgia,serif;color:var(--rust);font-size:20px}
+  .panel p.sub{font-size:12.5px;color:#777;margin:4px 0 12px}
+  .phone{max-width:330px;margin:0 auto;background:#0b141a;border-radius:22px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  .wa-head{background:var(--wa);color:#fff;border-radius:14px 14px 0 0;padding:9px 12px;font-size:13.5px}
+  .wa-head b{display:block;font-size:14.5px}
+  .wa-body{background:#e5ddd5;border-radius:0 0 14px 14px;padding:12px 9px;min-height:290px;display:flex;flex-direction:column;gap:7px}
+  .msg{max-width:85%;padding:8px 10px;border-radius:9px;font-size:13.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 1px rgba(0,0,0,.12)}
+  .msg.bot{background:#fff;align-self:flex-start}
+  .msg.me{background:#dcf8c6;align-self:flex-end}
+  .wa-btns{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;justify-content:center}
+  .wa-btns button{background:#fff;border:1.5px solid #25d366;color:var(--wa);border-radius:99px;padding:8px 13px;font-size:13px;font-weight:bold;cursor:pointer}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:12px}
+  th,td{border-bottom:1px solid #eee;padding:6px 4px;text-align:left}
+  .astats{display:flex;gap:10px;flex-wrap:wrap}
+  .astat{flex:1;min-width:100px;background:#fdf1da;border:1px solid #ecd3ac;border-radius:10px;padding:10px;text-align:center}
+  .astat b{display:block;font-size:19px;color:var(--rust)}
+  .astat span{font-size:11.5px;color:#8a6a35}
+  #chatFab{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;border:2px solid var(--wheat2);background:radial-gradient(circle at 32% 28%,#c07f2a,var(--wheat) 70%);cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.4);z-index:50;display:flex;align-items:center;justify-content:center;padding:0;font-size:26px}
+  #chatFab::after{content:'';position:absolute;top:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#25d366;border:2px solid var(--cream)}
+  #chatPanel{position:fixed;right:18px;bottom:86px;width:min(92vw,350px);background:#fff;border-radius:16px;box-shadow:0 16px 44px rgba(0,0,0,.45);display:none;flex-direction:column;overflow:hidden;z-index:50;font-family:Arial,sans-serif}
+  #chatPanel.open{display:flex}
+  .chat-head{background:linear-gradient(90deg,var(--rust),#b5703c);color:#ffedc9;padding:12px 14px}
+  .chat-head b{font-size:15px}.chat-head span{display:block;font-size:11.5px;opacity:.85}
+  #chatMsgs{padding:12px;display:flex;flex-direction:column;gap:7px;max-height:300px;overflow-y:auto;background:#fdf6e9}
+  .cmsg{max-width:86%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.45;white-space:pre-line}
+  .cmsg.bot{background:#fff;border:1px solid #ecd3ac;align-self:flex-start}
+  .cmsg.me{background:var(--rust);color:#ffedc9;align-self:flex-end}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px;background:#fdf6e9}
+  .chips button{background:#fff;border:1.5px solid var(--wheat2);color:var(--rust);border-radius:99px;padding:6px 11px;font-size:12.5px;cursor:pointer;font-weight:bold}
+  .chat-in{display:flex;border-top:1px solid #eee}
+  .chat-in input{flex:1;border:none;padding:12px;font-size:14.5px;outline:none}
+  .chat-in button{background:var(--rust);color:#ffedc9;border:none;padding:0 17px;font-size:15px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="demo-banner">DEMO built by SA Technologies — sample catalogue & demo prices, no real payments. One link replaces "email or DM us your order".</div>
+  <div class="card">
+    <div class="hero">
+      <div class="kicker">OUR DAILY BREAD CO · SAN DIEGO</div>
+      <h1>Our Daily Bread <span>Baked fresh in San Diego</span></h1>
+      <p class="tag">Slow-fermented loaves and pastries — browse the catalogue, fill a basket, check out, done.</p>
+      <div class="stats">
+        <div class="stat"><b>Baked daily</b><span>small batches</span></div>
+        <div class="stat"><b>Cart + checkout</b><span>pay online</span></div>
+        <div class="stat"><b>Instant</b><span>order confirmation</span></div>
+      </div>
+    </div>
+
+    <div class="services">
+      <div class="svc"><b>🛒 The catalogue, with an actual checkout</b><p>Today the priced catalogue exists — but ordering still means emailing or DMing and waiting. Here customers add to a basket, pay online and get a <b>confirmation ID instantly</b>. The bread is reserved; nobody's loaf depends on an inbox being checked.</p></div>
+      <div class="svc"><b>📋 Every order lands in one place</b><p>Instead of orders split between email threads and Instagram DMs, the bakery sees each confirmed order — items, total, pickup day — on one dashboard, ready to bake against.</p></div>
+    </div>
+
+    <h2 class="sec">Catalogue — add to your basket</h2>
+    <p class="secsub">Demo prices for illustration, in line with the bakery's priced catalogue style.</p>
+    <div class="catalog" id="catalog"></div>
+
+    <div class="cartbox" id="cartBox">
+      <h3>🧺 Your basket</h3>
+      <div id="cartLines"><p class="cempty">Your basket is empty — add a loaf above.</p></div>
+      <div class="ctotal"><span>Total</span><span id="cartTotal">$0</span></div>
+    </div>
+
+    <h2 class="sec">Checkout</h2>
+    <p class="secsub">Pay online (demo) and your order is confirmed instantly — with an order ID.</p>
+    <form id="coForm">
+      <label>Your name</label>
+      <input id="name" placeholder="e.g. Maria Gonzalez" autocomplete="name">
+      <label>Phone (for order updates)</label>
+      <input id="phone" placeholder="e.g. 619 555 0117" inputmode="tel" autocomplete="tel">
+      <div class="grid2">
+        <div><label>Pickup day</label>
+          <input id="pdate" type="date"></div>
+        <div><label>Pickup time</label>
+          <select id="slot"><option>8:00 AM</option><option>10:00 AM</option><option>12:00 PM</option><option>2:00 PM</option><option>4:00 PM</option></select></div>
+      </div>
+      <label>Card number (demo — never enter a real card)</label>
+      <input id="card" placeholder="4242 4242 4242 4242" inputmode="numeric">
+      <div class="grid2">
+        <div><label>Expiry</label><input id="exp" placeholder="MM / YY"></div>
+        <div><label>CVC</label><input id="cvc" placeholder="123" inputmode="numeric"></div>
+      </div>
+      <div class="err" id="err"></div>
+      <button class="cta" type="submit">Pay &amp; confirm order →</button>
+    </form>
+    <div class="tiny">In the live version this is a real card checkout (Stripe) — the confirmation below is exactly what the customer sees, and the order prints straight onto the bakery's bake list.</div>
+
+    <div class="confirm" id="confirm">
+      <h3>✅ Order CONFIRMED &amp; PAID (demo)</h3>
+      <div class="id" id="ordId"></div>
+      <p id="confirmText" style="margin-top:6px;font-size:14px"></p>
+      <p style="font-size:13px;margin-top:6px">No email, no DM, no waiting — catalogue to confirmed order in about a minute. Show this ID at pickup.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Order on WhatsApp — try it</h2>
+    <p class="sub">In the live version this bot sits on the bakery's WhatsApp. Customers see today's bakes, ask about pickup and get sent to the catalogue to check out. Tap the buttons:</p>
+    <div class="phone">
+      <div class="wa-head"><b>Our Daily Bread Co</b>business account · online</div>
+      <div class="wa-body" id="waBody"></div>
+    </div>
+    <div class="wa-btns" id="waBtns">
+      <button data-wa="hi">👋 Say Hi</button>
+      <button data-wa="menu">🍞 Today's bakes</button>
+      <button data-wa="order">🛒 How do I order?</button>
+      <button data-wa="pickup">🕗 Pickup info</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Bakery view — what Our Daily Bread sees</h2>
+    <p class="sub">Confirmed, paid orders in one list to bake against — instead of orders buried across email and Instagram.</p>
+    <div class="astats">
+      <div class="astat"><b id="stCount">0</b><span>confirmed orders</span></div>
+      <div class="astat"><b id="stLoaves">0</b><span>items to bake</span></div>
+      <div class="astat"><b id="stTotal">$0</b><span>paid order value</span></div>
+    </div>
+    <table><thead><tr><th>Order</th><th>Name</th><th>Items</th><th>Pickup</th></tr></thead><tbody id="rows"></tbody></table>
+  </div>
+</div>
+
+<script>
+const CATALOG = [
+  {name:'Country Sourdough', desc:'48-hour ferment, stone-baked crust', price:11},
+  {name:'Seeded Multigrain', desc:'Seven grains & seeds, hearty crumb', price:10},
+  {name:'Rosemary Sea Salt Focaccia', desc:'Olive oil, fresh rosemary, flaky salt', price:9},
+  {name:'Butter Croissants (4)', desc:'Laminated over two days, French butter', price:14},
+  {name:'Cinnamon Raisin Loaf', desc:'Swirled cinnamon, plump raisins', price:10},
+  {name:'Chocolate Babka', desc:'Dark chocolate, braided & glazed', price:16}
+];
+const PRICE = {}; CATALOG.forEach(i => PRICE[i.name] = i.price);
+let cart = {};
+const catEl = document.getElementById('catalog');
+catEl.innerHTML = CATALOG.map(i =>
+  '<div class="item"><div><b>' + i.name + '</b><p>' + i.desc + '</p></div><span class="pr">$' + i.price + '</span><button type="button" data-add="' + i.name + '">Add +</button></div>').join('');
+catEl.addEventListener('click', e => {
+  const n = e.target.getAttribute('data-add');
+  if(!n) return;
+  cart[n] = (cart[n] || 0) + 1;
+  renderCart();
+  document.getElementById('cartBox').scrollIntoView({behavior:'smooth', block:'center'});
+});
+function cartTotal(){ return Object.keys(cart).reduce((s,n) => s + PRICE[n] * cart[n], 0); }
+function renderCart(){
+  const lines = document.getElementById('cartLines');
+  const names = Object.keys(cart).filter(n => cart[n] > 0);
+  if(!names.length){ lines.innerHTML = '<p class="cempty">Your basket is empty — add a loaf above.</p>'; }
+  else {
+    lines.innerHTML = names.map(n =>
+      '<div class="cline"><span>' + n + '</span><span><button class="qbtn" data-dec="' + n + '">−</button> ' + cart[n] + ' <button class="qbtn" data-inc="' + n + '">+</button> · $' + (PRICE[n] * cart[n]) + '</span></div>').join('');
+  }
+  document.getElementById('cartTotal').textContent = '$' + cartTotal();
+}
+document.getElementById('cartLines').addEventListener('click', e => {
+  const inc = e.target.getAttribute('data-inc'), dec = e.target.getAttribute('data-dec');
+  if(inc) cart[inc]++;
+  if(dec){ cart[dec]--; if(cart[dec] <= 0) delete cart[dec]; }
+  if(inc || dec) renderCart();
+});
+
+const SEED = [
+  {id:'ODB-5101', name:'Demo Customer 1', items:'Country Sourdough ×2', count:2, total:22, date:'2026-10-25', slot:'8:00 AM'},
+  {id:'ODB-5102', name:'Demo Customer 2', items:'Butter Croissants (4) ×1, Chocolate Babka ×1', count:2, total:30, date:'2026-10-25', slot:'10:00 AM'},
+  {id:'ODB-5103', name:'Demo Customer 3', items:'Seeded Multigrain ×1', count:1, total:10, date:'2026-10-26', slot:'12:00 PM'}
+];
+let orders = JSON.parse(localStorage.getItem('odb_ord') || 'null') || SEED.slice();
+function render(){
+  document.getElementById('stCount').textContent = orders.length;
+  document.getElementById('stLoaves').textContent = orders.reduce((s,x) => s + x.count, 0);
+  document.getElementById('stTotal').textContent = '$' + orders.reduce((s,x) => s + x.total, 0);
+  document.getElementById('rows').innerHTML = orders.map(x =>
+    '<tr><td>' + x.id + '</td><td>' + x.name + '</td><td>' + x.items + ' · $' + x.total + '</td><td>' + (x.date || '—') + ' · ' + x.slot + '</td></tr>').join('');
+  localStorage.setItem('odb_ord', JSON.stringify(orders));
+}
+document.getElementById('coForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.replace(/\D/g,'');
+  const date = document.getElementById('pdate').value;
+  const slot = document.getElementById('slot').value;
+  const card = document.getElementById('card').value.replace(/\D/g,'');
+  const err = document.getElementById('err');
+  const names = Object.keys(cart).filter(n => cart[n] > 0);
+  if(!names.length){ err.textContent = 'Your basket is empty — add at least one item first.'; err.style.display='block'; return; }
+  if(name.length < 2){ err.textContent = 'Please enter your name.'; err.style.display='block'; return; }
+  if(phone.length < 10){ err.textContent = 'Please enter a valid phone number.'; err.style.display='block'; return; }
+  if(!date){ err.textContent = 'Please choose a pickup day.'; err.style.display='block'; return; }
+  if(card.length < 12){ err.textContent = 'Please enter the demo card number (any 12+ digits).'; err.style.display='block'; return; }
+  err.style.display = 'none';
+  const id = 'ODB-' + Math.floor(1000 + Math.random()*9000);
+  const itemsStr = names.map(n => n + ' ×' + cart[n]).join(', ');
+  const count = names.reduce((s,n) => s + cart[n], 0);
+  const total = cartTotal();
+  orders.push({id, name, items: itemsStr, count, total, date, slot});
+  render();
+  const c = document.getElementById('confirm');
+  c.style.display = 'block';
+  document.getElementById('ordId').textContent = id;
+  document.getElementById('confirmText').textContent = name + ' · ' + itemsStr + ' · Paid $' + total + ' · Pickup ' + date + ' at ' + slot;
+  cart = {}; renderCart();
+  c.scrollIntoView({behavior:'smooth'});
+});
+renderCart();
+render();
+
+/* ---------- WhatsApp bot simulator ---------- */
+const waBody = document.getElementById('waBody');
+function waAdd(text, who){
+  const d = document.createElement('div');
+  d.className = 'msg ' + who; d.textContent = text;
+  waBody.appendChild(d); waBody.scrollTop = waBody.scrollHeight;
+}
+function waBot(text){ setTimeout(() => waAdd(text, 'bot'), 450); }
+document.getElementById('waBtns').addEventListener('click', e => {
+  const key = e.target.getAttribute('data-wa');
+  if(!key) return;
+  if(key === 'hi'){ waAdd('Hi', 'me'); waBot('Morning! 🍞 Welcome to Our Daily Bread Co, San Diego.\nI can help with:\n🍞 Today\'s bakes & prices\n🛒 Ordering & checkout\n🕗 Pickup times\nTap a button below!'); }
+  if(key === 'menu'){ waAdd("Today's bakes", 'me'); waBot('🍞 Today (demo prices):\nCountry Sourdough $11 · Multigrain $10\nFocaccia $9 · Croissants (4) $14\nCinnamon Raisin $10 · Choc Babka $16\nAdd your favourites to the basket on the website and check out — you\'ll get a confirmation ID instantly.'); }
+  if(key === 'order'){ waAdd('How do I order?', 'me'); waBot('🛒 On the website: browse the catalogue, tap "Add", then check out and pay online.\nYour order is CONFIRMED with an order ID right away — no emailing or DMing your order and hoping it was seen.'); }
+  if(key === 'pickup'){ waAdd('Pickup info', 'me'); waBot('🕗 Choose your pickup day and time at checkout — 8 AM, 10 AM, 12 PM, 2 PM or 4 PM.\nYour bread is baked and bagged against your order ID, ready when you arrive.'); }
+});
+waAdd('Hello! Tap "Say Hi" below to start — just like a customer would.', 'bot');
+</script>
+
+<button id="chatFab" title="Chat with the bakery assistant" aria-label="Chat with the bakery assistant">🍞</button>
+<div id="chatPanel">
+  <div class="chat-head"><div><b>Bakery Assistant</b><span>Website chatbot · replies instantly</span></div></div>
+  <div id="chatMsgs"></div>
+  <div class="chips" id="chatChips">
+    <button>What's fresh today?</button>
+    <button>How do I order?</button>
+    <button>Pickup times?</button>
+    <button>Do you deliver?</button>
+    <button>Sourdough price?</button>
+    <button>Contact</button>
+  </div>
+  <div class="chat-in">
+    <input id="chatText" placeholder="Ask about bread, orders, pickup…">
+    <button id="chatSend">➤</button>
+  </div>
+</div>
+
+<script>
+/* ---------- Website chatbot ---------- */
+const panel = document.getElementById('chatPanel');
+const msgs = document.getElementById('chatMsgs');
+let chatOpened = false;
+document.getElementById('chatFab').addEventListener('click', () => {
+  panel.classList.toggle('open');
+  if(!chatOpened){
+    chatOpened = true;
+    cBot('Morning! I\'m the Our Daily Bread assistant 🍞 Ask me about today\'s bakes, ordering, pickup or delivery — or tap a question below.');
+  }
+});
+function cAdd(text, who){
+  const d = document.createElement('div');
+  d.className = 'cmsg ' + who; d.textContent = text;
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+}
+function cBot(text){ setTimeout(() => cAdd(text, 'bot'), 350); }
+function answer(q){
+  const t = q.toLowerCase();
+  if(t.includes('sourdough'))
+    return '🍞 Our Country Sourdough is $11 (demo price) — 48-hour ferment, stone-baked. Tap "Add" in the catalogue and check out; your loaf is reserved with an order ID.';
+  if(t.includes('fresh') || t.includes('today') || t.includes('menu') || t.includes('price') || t.includes('catalog'))
+    return '🍞 The catalogue (demo prices): Country Sourdough $11 · Seeded Multigrain $10 · Rosemary Focaccia $9 · Butter Croissants (4) $14 · Cinnamon Raisin $10 · Chocolate Babka $16. Everything is baked fresh daily in San Diego.';
+  if(t.includes('order') || t.includes('how') || t.includes('buy') || t.includes('checkout') || t.includes('pay'))
+    return '🛒 Add items to your basket on this page, then check out and pay online — your order is CONFIRMED instantly with an order ID. No email or DM needed.';
+  if(t.includes('pickup') || t.includes('time') || t.includes('when') || t.includes('collect'))
+    return '🕗 Pickups run 8 AM–4 PM in slots (8, 10, 12, 2, 4). Choose yours at checkout — your order is bagged and waiting under your order ID.';
+  if(t.includes('deliver') || t.includes('delivery') || t.includes('ship'))
+    return '🚗 In the live version, local San Diego delivery is offered at checkout alongside pickup. For this demo, pickup is the live option — pick a slot and your order is confirmed instantly.';
+  if(t.includes('contact') || t.includes('email') || t.includes('instagram'))
+    return '📸 You can find the bakery on Instagram @ourdailybreadsandiego — but ordering here is faster: catalogue, cart, payment and confirmation in about a minute.';
+  if(t.includes('hi') || t.includes('hello') || t.includes('hey'))
+    return 'Morning! 🙌 Ask me about today\'s bakes, ordering, pickup or delivery.';
+  return 'I can help with the catalogue & prices, how ordering + checkout works, pickup times and delivery. For anything else, message @ourdailybreadsandiego on Instagram — in the live version, the bakery can step into this chat.';
+}
+function askChat(q){
+  if(!q.trim()) return;
+  cAdd(q, 'me'); cBot(answer(q));
+}
+document.getElementById('chatSend').addEventListener('click', () => {
+  const inp = document.getElementById('chatText');
+  askChat(inp.value); inp.value = '';
+});
+document.getElementById('chatText').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){ const inp = e.target; askChat(inp.value); inp.value = ''; }
+});
+document.getElementById('chatChips').addEventListener('click', e => {
+  if(e.target.tagName === 'BUTTON') askChat(e.target.textContent);
+});
+</script>
+</body>
+</html>
